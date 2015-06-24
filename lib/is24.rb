@@ -9,10 +9,10 @@ require 'cgi'
 module Is24
   class Api
     include Is24::Logger
-
-    API_ENDPOINT = "http://rest.immobilienscout24.de/restapi/api/search/v1.0/"
-    API_OFFER_ENDPOINT = "http://rest.immobilienscout24.de/restapi/api/offer/v1.0/"
-    API_AUTHORIZATION_ENDPOINT = "http://rest.immobilienscout24.de/restapi/security/"
+    
+    API_ENDPOINT = "https://rest.sandbox-immobilienscout24.de/restapi/api/search/v1.0/"
+    API_OFFER_ENDPOINT = "https://rest.sandbox-immobilienscout24.de/restapi/api/offer/v1.0/"
+    API_AUTHORIZATION_ENDPOINT = "https://rest.sandbox-immobilienscout24.de/restapi/security/"
 
     # TODO move in separate module
     MARKETING_TYPES = {
