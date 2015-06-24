@@ -99,7 +99,7 @@ module Is24
       response = {
         :oauth_token => CGI::unescape(body[0].split("=")[1]),
         :oauth_token_secret => CGI::unescape(body[1].split("=")[1]),
-        :redirect_uri => "http://rest.immobilienscout24.de/restapi/security/oauth/confirm_access?#{body[0]}"
+        :redirect_uri => "https://rest.sandbox-immobilienscout24.de/restapi/security/oauth/confirm_access?#{body[0]}"
       }
     end
 
