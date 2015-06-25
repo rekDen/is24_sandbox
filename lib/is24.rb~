@@ -107,7 +107,7 @@ module Is24
         :oauth_token_secret => @secret,
         :redirect_uri => "https://rest.sandbox-immobilienscout24.de/restapi/security/oauth/confirm_access?#{body[0]}",
       }
-      redirect_to response[:redirect_uri] and return response
+      response
     end
 
     def confirm_access( oauth_token )

@@ -122,9 +122,9 @@ module Is24
 
     def request_access_token( params = {} )
       # TODO error handling
-      #@oauth_verifier = params[:oauth_verifier]
+      @oauth_verifier = params[:oauth_verifier]
       #@token = params[:oauth_token]
-      @secret = params[:oauth_token_secret]
+      #@secret = params[:oauth_token_secret]
 
       response = connection(:authorization).get("oauth/access_token")
       puts "apklsdfj uiosdfopajusdf oapuisdfj oaisjudf "
