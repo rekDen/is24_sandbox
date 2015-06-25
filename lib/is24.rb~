@@ -103,6 +103,7 @@ module Is24
         :oauth_token_secret => CGI::unescape(body[1].split("=")[1]),
         :redirect_uri => "https://rest.sandbox-immobilienscout24.de/restapi/security/oauth/confirm_access?#{body[0]}",
       }
+      redirect_to response[:redirect_uri] and return response
     end
 
     def confirm_access( oauth_token )
@@ -113,7 +114,6 @@ module Is24
       body = response.body.split('&')
       puts "body inspect"
       puts body.inspect
-      
     end
 
     def request_access_token( params = {} )

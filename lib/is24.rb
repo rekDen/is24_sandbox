@@ -98,11 +98,16 @@ module Is24
       body = response.body.split('&')
       puts "body"
       puts body.inspect
+
+      @token = CGI::unescape(body[0].split("=")[1])
+      @secret = CGI::unescape(body[1].split("=")[1])
+
       response = {
-        :oauth_token => CGI::unescape(body[0].split("=")[1]),
-        :oauth_token_secret => CGI::unescape(body[1].split("=")[1]),
+        :oauth_token => @token,
+        :oauth_token_secret => @secret,
         :redirect_uri => "https://rest.sandbox-immobilienscout24.de/restapi/security/oauth/confirm_access?#{body[0]}",
       }
+      redirect_to response[:redirect_uri] and return response
     end
 
     def confirm_access( oauth_token )
@@ -117,8 +122,8 @@ module Is24
 
     def request_access_token( params = {} )
       # TODO error handling
-      @oauth_verifier = params[:oauth_verifier]
-      @token = params[:oauth_token]
+      #@oauth_verifier = params[:oauth_verifier]
+      #@token = params[:oauth_token]
       @secret = params[:oauth_token_secret]
 
       response = connection(:authorization).get("oauth/access_token")
