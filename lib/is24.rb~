@@ -124,12 +124,13 @@ module Is24
       # TODO error handling
       @oauth_verifier = params[:oauth_verifier]
       @token = params[:oauth_token]
+      @secret = params[:oauth_token_secret]      
 
       puts "Secret"
       puts @secret      
 
       #@token = params[:oauth_token]
-      #@secret = params[:oauth_token_secret]
+      
 
       response = connection(:authorization).get("oauth/access_token")
       puts "apklsdfj uiosdfopajusdf oapuisdfj oaisjudf "

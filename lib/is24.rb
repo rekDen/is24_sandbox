@@ -186,7 +186,9 @@ module Is24
       response.body["expose.expose"]
     end
 
-    def perform_query(query)
+    def perform_query(params = {}, query)
+      @token = params[:oauth_token]
+      @secret = params[:oauth_token_secret]   
       response = connection(:offer).get(query)
       response.body
     end
