@@ -81,7 +81,7 @@ module Is24
     end
 
     def initialize( options = {} )
-      logger "Initialized b'nerd IS24 with options #{options}"
+      logger "Initialized b'nerd IS24 with options #{options}  jl ljk lj l üopihjiop jüiop jüoijlmk"
 
       @token = options[:token] || nil
       @secret = options[:secret] || nil
