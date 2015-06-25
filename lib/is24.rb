@@ -123,6 +123,10 @@ module Is24
     def request_access_token( params = {} )
       # TODO error handling
       @oauth_verifier = params[:oauth_verifier]
+
+      puts "Verifier"
+      puts @oauth_verifier      
+
       #@token = params[:oauth_token]
       #@secret = params[:oauth_token_secret]
 
