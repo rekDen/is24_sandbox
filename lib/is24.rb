@@ -96,6 +96,8 @@ module Is24
       response = connection(:authorization, callback_uri).get("oauth/request_token")
 
       body = response.body.split('&')
+      puts "body"
+      puts body.inspect
       response = {
         :oauth_token => CGI::unescape(body[0].split("=")[1]),
         :oauth_token_secret => CGI::unescape(body[1].split("=")[1]),

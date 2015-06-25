@@ -110,6 +110,8 @@ module Is24
       @secret = params[:oauth_token_secret]
 
       response = connection(:authorization).get("oauth/access_token")
+      puts "apklsdfj uiosdfopajusdf oapuisdfj oaisjudf "
+      puts response.inspect
       body = response.body.split('&')
 
       response = {
