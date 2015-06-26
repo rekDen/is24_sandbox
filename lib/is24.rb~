@@ -235,6 +235,8 @@ module Is24
                }
 
       object = URI::encode_www_form(object)
+      puts object.inspect
+
       response = connection(:offer).post query, object do |req|
         req.headers['Content-Type'] = 'application/json'
         req.headers['Content-Length'] = object.length.to_s
