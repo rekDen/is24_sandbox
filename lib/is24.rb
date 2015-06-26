@@ -222,6 +222,18 @@ module Is24
       response.body["shortlist.shortlistEntries"].first["shortlistEntry"]
     end
 
+    def publish_expose (id)
+      query = "publish"
+      object = {"common.publishObject": {"realEstate": {"@id": id.to_s}}}
+      response = connection(:offer).post query, object do |req|
+        req.headers['Content-Type'] = 'application/json'
+        req.headers['Content-Length'] = object.length.to_s
+        req.headers['Content-Language'] = "en-US"
+        req.headers['Content-Encoding'] = 'UTF-8'             
+      end
+    end
+
+
     protected
 
     def connection(connection_type = :default, callback_uri = nil)
