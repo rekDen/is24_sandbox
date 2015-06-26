@@ -198,10 +198,11 @@ module Is24
       puts xml.inspect
       @token = params[:oauth_token]
       @secret = params[:oauth_token_secret]   
-      puts "yeah"
+      puts "File size"
+      puts File.size(xml)
       response = connection(:offer).post query, xml do |req|
         req.headers['Content-Type'] = 'application/xml',
-        req.headers['Content-Length'] = '100'
+        req.headers['Content-Length'] = File.size(xml)
       end
       puts "oioioi"
       response.body      
