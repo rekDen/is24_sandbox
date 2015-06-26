@@ -202,7 +202,7 @@ module Is24
       puts File.size(xml)
       response = connection(:offer).post query, xml do |req|
         req.headers['Content-Type'] = 'application/xml',
-        req.headers['Content-Length'] = File.size(xml)
+        req.headers['Content-Length'] = File.size(xml).to_s
       end
       puts "oioioi"
       response.body      
