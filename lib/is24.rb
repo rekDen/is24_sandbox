@@ -198,7 +198,11 @@ module Is24
       puts xml.inspect
       @token = params[:oauth_token]
       @secret = params[:oauth_token_secret]   
-      response = connection(:offer).post query, xml
+      puts "yeah"
+      response = connection(:offer).post query, xml do |req|
+        req.headers['Content-Type'] = 'application/xml'
+      end
+      puts "oioioi"
       response.body      
     end
 
