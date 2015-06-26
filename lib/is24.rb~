@@ -186,9 +186,19 @@ module Is24
       response.body["expose.expose"]
     end
 
-    def perform_query(query)
+    def perform_query(params = {}, query)
+      @token = params[:oauth_token]
+      @secret = params[:oauth_token_secret]   
       response = connection(:offer).get(query)
       response.body
+    end
+
+    def post_expose( params = {}, xml_url )
+      xml = Faraday::UploadIO.new(xml_url, "application/xml", "15568799.xml")
+      @token = params[:oauth_token]
+      @secret = params[:oauth_token_secret]   
+      response = connection(:offer).post query, xml
+      response.body      
     end
 
     def list_exposes
@@ -245,7 +255,52 @@ module Is24
             builder.response :mashify
             builder.response :json unless connection_type =~ /authorization/i
             builder.adapter Faraday.default_adapter
-          end
+      end
+    end
+
+    def connection_post(connection_type = :default, callback_uri = nil)
+
+      # set request defaults
+      defaults = {
+        :url => API_ENDPOINT,
+        :headers => {
+          :accept =>  'application/json',
+          :user_agent => 'b\'nerd .media IS24 Ruby Client'}
+      }
+
+      defaults.merge!( {
+        :url => API_AUTHORIZATION_ENDPOINT
+      } ) if connection_type =~ /authorization/i
+
+      defaults.merge!( {
+        :url => API_OFFER_ENDPOINT
+      } ) if connection_type =~ /offer/i
+
+
+      # define oauth credentials
+      oauth = {
+        :consumer_key => @consumer_key,
+        :consumer_secret => @consumer_secret,
+        :token => @token,
+        :token_secret => @secret
+      }
+
+      # merge callback_uri if present
+      oauth.merge!( {
+        :callback => callback_uri
+      } ) if connection_type =~ /authorization/i && callback_uri
+
+      # merge verifier if present
+      oauth.merge!( {
+        :verifier => @oauth_verifier
+      } ) if connection_type =~ /authorization/i && @oauth_verifier
+
+      Faraday::Connection.new( defaults ) do |builder|
+            builder.request :oauth, oauth
+            builder.response :mashify
+            builder.response :json unless connection_type =~ /authorization/i
+            builder.adapter Faraday.default_adapter
+      end
     end
 
   end
