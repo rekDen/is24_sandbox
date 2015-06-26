@@ -193,8 +193,8 @@ module Is24
       response.body
     end
 
-    def post_expose( params = {}, query, xml_url )
-      xml = Faraday::UploadIO.new(xml_url, "application/xml", "123.xml")
+    def post_xml( params = {}, query, xml_url )
+      xml = Faraday::UploadIO.new(xml_url, "application/xml")
       puts xml.inspect
       @token = params[:oauth_token]
       @secret = params[:oauth_token_secret]   
@@ -222,22 +222,31 @@ module Is24
       response.body["shortlist.shortlistEntries"].first["shortlistEntry"]
     end
 
-    def publish_expose (params = {}, id)
-      @token = params[:oauth_token]
-      @secret = params[:oauth_token_secret] 
-
-      query = "publish"
+    def get_json (id)
       object = {
                 "common.publishObject" => 
                     {
                       "realEstate" => 
                         {
-                          "@id" => id.to_s
+                          "@id" => id
+                        },
+                      "publishChannel" =>
+                        {
+                          "@id" => "10000"
                         }
                      }
-               }
+               }            
 
-      object = URI::encode_www_form(object)
+      render :json=> object
+    end
+
+    def publish_expose (params = {}, id)
+      @token = params[:oauth_token]
+      @secret = params[:oauth_token_secret] 
+
+      query = "publish"
+      object = get_json(id.to_s)
+
       puts object.inspect
 
       response = connection(:offer).post query, object do |req|
