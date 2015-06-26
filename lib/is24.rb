@@ -194,7 +194,7 @@ module Is24
     end
 
     def post_expose( params = {}, query, xml_url )
-      xml = Faraday::UploadIO.new(xml_url, "application/xml", "15568799.xml")
+      xml = Faraday::UploadIO.new(xml_url, "application/xml")
       puts xml.inspect
       @token = params[:oauth_token]
       @secret = params[:oauth_token_secret]   

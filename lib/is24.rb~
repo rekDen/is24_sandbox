@@ -193,8 +193,9 @@ module Is24
       response.body
     end
 
-    def post_expose( params = {}, xml_url )
+    def post_expose( params = {}, query, xml_url )
       xml = Faraday::UploadIO.new(xml_url, "application/xml", "15568799.xml")
+      puts xml.inspect
       @token = params[:oauth_token]
       @secret = params[:oauth_token_secret]   
       response = connection(:offer).post query, xml
