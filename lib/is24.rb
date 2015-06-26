@@ -201,7 +201,7 @@ module Is24
       puts "yeah"
       response = connection(:offer).post query, xml do |req|
         req.headers['Content-Type'] = 'application/xml',
-        req.headers['Content-Length'] = '9999'
+        req.headers['Content-Length'] = '100'
       end
       puts "oioioi"
       response.body      
