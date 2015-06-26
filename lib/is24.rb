@@ -201,11 +201,13 @@ module Is24
       #puts "File size"
       #puts File.size(xml)
       response = connection(:offer).post query, xml do |req|
-        req.headers['Content-Type'] = 'application/xml',
+        req.headers['Content-Type'] = 'application/xml'
         req.headers['Content-Length'] = File.size(xml).to_s
         req.headers['Content-Encoding'] = 'UTF-8'
+        req.headers['Accept'] = "*/*" 
       end
       puts "oioioi"
+      puts response
       response.body      
     end
 
