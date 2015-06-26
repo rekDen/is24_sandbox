@@ -193,8 +193,8 @@ module Is24
       response.body
     end
 
-    def post_xml( params = {}, query, xml_url )
-      xml = Faraday::UploadIO.new(xml_url, "application/xml")
+    def post_expose( params = {}, query, xml_url )
+      xml = Faraday::UploadIO.new(xml_url, "application/xml", "123.xml")
       puts xml.inspect
       @token = params[:oauth_token]
       @secret = params[:oauth_token_secret]   
@@ -237,7 +237,6 @@ module Is24
         req.headers['Content-Encoding'] = 'UTF-8'             
       end
 
-      puts object.inspect
       puts response.inspect
 
     end
