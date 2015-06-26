@@ -233,7 +233,7 @@ module Is24
                         }
                      }
                }
-      response = connection(:offer).post query, object do |req|
+      response = connection(:offer).post query, URI::encode_www_form(object) do |req|
         req.headers['Content-Type'] = 'application/json'
         #req.headers['Content-Length'] = object.length.to_s
         req.headers['Content-Language'] = "en-US"
