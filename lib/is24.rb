@@ -222,7 +222,10 @@ module Is24
       response.body["shortlist.shortlistEntries"].first["shortlistEntry"]
     end
 
-    def publish_expose (id)
+    def publish_expose (params = {}, id)
+      @token = params[:oauth_token]
+      @secret = params[:oauth_token_secret] 
+
       query = "publish"
       object = {
                 "common.publishObject" => 
