@@ -200,7 +200,7 @@ module Is24
       @secret = params[:oauth_token_secret]   
       puts "yeah"
       response = connection(:offer).post query, xml do |req|
-        req.headers['Content-Type'] = 'application/xml'
+        req.headers['Content-Type'] = 'application/xml',
         req.headers['Content-Length'] = 9999
       end
       puts "oioioi"
