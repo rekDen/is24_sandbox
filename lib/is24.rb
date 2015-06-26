@@ -204,7 +204,7 @@ module Is24
         req.headers['Content-Type'] = 'application/xml'
         req.headers['Content-Length'] = File.size(xml).to_s
         req.headers['Content-Encoding'] = 'UTF-8'
-        req.headers['Accept'] = "*/*" 
+        #req.headers['Accept'] = "*/*" 
       end
       puts "oioioi"
       puts response

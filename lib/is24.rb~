@@ -207,6 +207,7 @@ module Is24
         req.headers['Accept'] = "*/*" 
       end
       puts "oioioi"
+      puts response
       response.body      
     end
 
