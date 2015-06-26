@@ -222,36 +222,17 @@ module Is24
       response.body["shortlist.shortlistEntries"].first["shortlistEntry"]
     end
 
-    def get_json (id)
-      object = {
-                "common.publishObject" => 
-                    {
-                      "realEstate" => 
-                        {
-                          "@id" => id
-                        },
-                      "publishChannel" =>
-                        {
-                          "@id" => "10000"
-                        }
-                     }
-               }            
-
-      render :json=> object
-    end
-
-    def publish_expose (params = {}, id)
+    def publish_expose (params = {}, json)
       @token = params[:oauth_token]
       @secret = params[:oauth_token_secret] 
 
       query = "publish"
-      object = get_json(id.to_s)
 
-      puts object.inspect
+      puts json.inspect
 
-      response = connection(:offer).post query, object do |req|
+      response = connection(:offer).post query, json do |req|
         req.headers['Content-Type'] = 'application/json'
-        req.headers['Content-Length'] = object.length.to_s
+        req.headers['Content-Length'] = json.length.to_s
         req.headers['Content-Language'] = "en-US"
         req.headers['Content-Encoding'] = 'UTF-8'             
       end
