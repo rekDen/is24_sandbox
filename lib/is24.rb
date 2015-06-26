@@ -225,11 +225,11 @@ module Is24
     def publish_expose (id)
       query = "publish"
       object = {
-                "common.publishObject": 
+                "common.publishObject" => 
                     {
-                      "realEstate": 
+                      "realEstate" => 
                         {
-                          "@id": "63205866"
+                          "@id" => id.to_s
                         }
                      }
                }
